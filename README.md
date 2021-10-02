@@ -12,7 +12,7 @@ This is a project based on ConvNets used to identify whether a road is clean or 
   3. Code.
   4. References.
 
-## 1. Dataset downlaod
+## 1. Dataset download
 We have used web scraping techniques to download 238 images of both clean and dirty roads. This dataset was completely used for training the model.
 
 ## 2. Tools and Libraries
