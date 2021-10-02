@@ -70,12 +70,14 @@ class Classifier:
 
     def plot_loss_accuracy(self):
         # Plot the loss
-        plt.plot(self.history.history['loss'], label='train_loss')
+        plt.figure(figsize=(10,8))
+        plt.plot(self.history.history['loss'], label='train_loss',linestyle='dashed',c='m')
         plt.legend()
         plt.show()
 
         # Plot the accuracy
-        plt.plot(self.history.history['accuracy'], label='train_acc')
+        plt.figure(figsize=(10,8))
+        plt.plot(self.history.history['accuracy'], label='train_acc',linestyle='dashed',c='m')
         plt.legend()
         plt.show()
 
