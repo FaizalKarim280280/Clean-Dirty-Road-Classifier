@@ -16,7 +16,7 @@ class Classifier:
     def __init__(self, img_size, train_path):
         self.IMG_SIZE = img_size
         self.TRAIN_PATH = train_path
-        self.base_model = MobileNetV2(input_shape=IMG_SIZE + [3], include_top=False, weights='imagenet')
+        self.base_model = MobileNetV2(input_shape=self.IMG_SIZE + (3,), include_top=False, weights='imagenet')
 
     def data_augmentation(self):
         train_datagen = ImageDataGenerator(
@@ -40,7 +40,7 @@ class Classifier:
     def train(self):
         self.base_model.trainable = False
 
-        data_augmentation()
+        self.data_augmentation()
 
         x = Flatten()(self.base_model.output)
         x = Dense(512, activation='relu')(x)
@@ -58,12 +58,12 @@ class Classifier:
 
         self.history = self.model.fit(
             self.train_set,
-            epochs=15,
-            steps_per_epoch=len(train_set)
+            epochs=5,
+            steps_per_epoch=len(self.train_set)
         )
 
     def predict_image(self, img):
-        img = img.reshape(1, self.IMG_SIZE, 3)
+        img = img.reshape(1, self.IMG_SIZE[0],self.IMG_SIZE[1], 3)
         img = img/255
         prediction_info = self.model.predict(img)
         return "Clean Road" if np.argmax(prediction_info) == 0 else "Dirty Road"
@@ -85,4 +85,3 @@ class Classifier:
 
 if __name__ == '__main__':
     main()
-
