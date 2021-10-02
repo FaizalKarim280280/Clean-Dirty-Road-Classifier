@@ -30,8 +30,9 @@ Others include:
   * The output layer is a simple 2 unit softmax layer.<br>
 
 ### Training Accuracy and Loss 
-![acc](https://user-images.githubusercontent.com/79277882/135721088-ff910033-c625-435e-8a61-ed57e685e3fa.png)
-![loss](https://user-images.githubusercontent.com/79277882/135721115-5ba27aef-fbae-4b35-b0fa-5a3c0ad9ff8c.png)
+![acc](https://user-images.githubusercontent.com/79277882/135725086-58b74990-f045-411a-986f-552541626113.png)
+![loss](https://user-images.githubusercontent.com/79277882/135725087-0bb1ea5e-a9bc-4161-b18e-e17006d538a8.png)
+
 
 We have used <em>keras.losses.CategoricalCrossentropy</em> as our loss function, <em>keras.optimizers.Adam</em> as Optimizer and trained the model for 15 epochs. 
 ## 4. References
@@ -39,4 +40,3 @@ We have used <em>keras.losses.CategoricalCrossentropy</em> as our loss function,
   * [Transfer Learning](https://www.tensorflow.org/tutorials/images/transfer_learning)
   * [Web Scraping](https://realpython.com/python-web-scraping-practical-introduction/)
   * [MobileNet](https://arxiv.org/abs/1704.04861)
-
