@@ -30,11 +30,9 @@ Others include:
   * The output layer is a simple 2 unit softmax layer.<br>
 
 ### Training Accuracy and Loss 
-![acc](https://user-images.githubusercontent.com/79277882/135725086-58b74990-f045-411a-986f-552541626113.png)
-![loss](https://user-images.githubusercontent.com/79277882/135725087-0bb1ea5e-a9bc-4161-b18e-e17006d538a8.png)
+![loss](https://github.com/FaizalKarim280280/Clean-Dirty-Road-Classifier/blob/main/Plots/plot.jpg)
 
-
-We have used <em>keras.losses.CategoricalCrossentropy</em> as our loss function, <em>keras.optimizers.Adam</em> as Optimizer and trained the model for 15 epochs. 
+We have used <em>keras.losses.CategoricalCrossentropy</em> as our loss function, <em>keras.optimizers.Adam</em> as Optimizer and trained the model for 10 epochs. 
 ## 4. References
   * [Tensorflow](https://www.tensorflow.org/api_docs/python/tf)
   * [Transfer Learning](https://www.tensorflow.org/tutorials/images/transfer_learning)
