@@ -16,8 +16,8 @@ class Classifier:
     def __init__(self, img_size, train_path):
         self.IMG_SIZE = img_size
         self.TRAIN_PATH = train_path
-        self.base_model = MobileNetV2(input_shape=self.IMG_SIZE + (3,), include_top=False, weights='imagenet')
-
+        self.base_model = load_mobileNet(layers_freeze = 0.9)
+        
     def data_augmentation(self):
         train_datagen = ImageDataGenerator(
             rescale=1. / 255,
@@ -36,29 +36,37 @@ class Classifier:
             batch_size=32,
             class_mode='categorical'
         )
+        
+    def load_mobileNet(layers_freeze):
+        base_model = MobileNetV2(input_shape = input_shape + (3,), include_top = False)
+        base_model = Model(inputs = base_model.input, outputs = base_model.layers[-7].output)
+        n = int(len(base_model.layers) * layers_freeze)
+        
+        for i in range(0, n):
+            base_model.layers[i].trainable = False
+
+        return base_model 
 
     def train(self):
-        self.base_model.trainable = False
-
+        
         self.data_augmentation()
 
         x = Flatten()(self.base_model.output)
         x = Dense(512, activation='relu')(x)
-        x = Dense(256, activation='relu')(x)
         x = Dropout(0.2)(x)
         prediction = Dense(2, activation='softmax')(x)
 
-        self.model = Model(inputs=self.base_model.input, outputs=prediction)
+        self.model = Model(inputs=self.base_model.input, outputs = prediction)
 
         self.model.compile(
-            loss='categorical_crossentropy',
-            optimizer='adam',
-            metrics=['accuracy']
+            loss = keras.losses.CategoricalCrossentropy(),
+            optimizer = keras.optimizers.Adam(learning_rate = 4e-6),
+            metrics = ['accuracy']
         )
 
         self.history = self.model.fit(
             self.train_set,
-            epochs=5,
+            epochs=10,
             steps_per_epoch=len(self.train_set)
         )
 
